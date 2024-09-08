@@ -1,0 +1,38 @@
+name: FTP Deploy to Backend
+# on:
+#   push:
+#     branches: [ main ]
+on:
+ push:
+   tags:
+     - 'v*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+           
+      - name: Find changed files
+        run: echo name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+      #- name: Find changed files
+      #  id: changed_files
+      #  run: echo ::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+      # Here is the deployment action
+      - name: Upload latest code
+        #uses: airvzxf/ftp-deployment-action@latest
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          #local_dir: "./"
+          server-dir: "./bn.landdefender.org"
+          #args: --files "${{ steps.changed_files.outputs.files }}"
+          #delete: "false"
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
