@@ -58,13 +58,13 @@
             <div class="signin-info">
                 <a href="index.html" class="logo">
                     <img src="<?php echo base_url() ?>/assets/admin/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
-                    Watbundanjai
+                    LAND DEFENDERS
                 </a> <!-- / .logo -->
                 <!--div class="slogan">
                    Content Management
                 </div--> <!-- / .slogan -->
                 <ul>
-                    <li><i class="fa fa-sitemap signin-icon"></i> Wat Management</li>
+                    <!-- <li><i class="fa fa-sitemap signin-icon"></i> Wat Management</li> -->
                     <li><i class="fa fa-file-text-o signin-icon"></i> Content Management</li>
                     <li><i class="fa fa-user signin-icon"></i> User Management</li>
                 </ul> <!-- / Info list -->
