@@ -90,7 +90,7 @@ $page = array(
                         <td><?php echo $row->id ?></td>
                         <td style="width:40%"><?php echo $thumb ?><br>
                             <?php echo $row->title ?><br>
-                            <small><?php echo @TEMPLENEW_CATE[$row->cate_id] ?></small><br>
+                            <small><?php echo @FAQ_CATE[$row->cate_id] ?></small><br>
                         </td>
                         <td>
                             Created Date : <?php echo $row->created ?><br>
