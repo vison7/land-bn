@@ -2,7 +2,7 @@
 $page = array('total_item' => $total_item, 'page_size' => $page_size, 'page_no' => $page_no, 'page_total' => $page_total);
 ?>
 <div class="page-header">
-    <h1><i class="fa fa-user page-header-icon"></i>&nbsp;&nbsp;ระบบจัดการผู้ใช้ระบบ</h1>
+    <h1><i class="fa fa-user page-header-icon"></i>&nbsp;&nbsp;Users</h1>
 </div>
 
 <form id="frm" name="frm" method="post">
@@ -35,7 +35,6 @@ $page = array('total_item' => $total_item, 'page_size' => $page_size, 'page_no' 
                     <th>#</th>
                     <th>UserName</th>
                     <th>Name / Email</th>
-                    <th>Temple</th>
                     <th>Permission</th>
                     <th>Date</th>
                     <th>Status</th>
@@ -54,7 +53,6 @@ $page = array('total_item' => $total_item, 'page_size' => $page_size, 'page_no' 
                         <td><?php echo $row->id ?></td>
                         <td><?php echo $row->username ?></td>
                         <td><?php echo $row->name .'<br>'.$row->email ?></td>
-                        <td><?php echo (!empty($row->temple_name)?$row->temple_name:'Main Site') ?></td>
                         <td><?php echo @$permission[$row->is_level] ?></td>
                         <td><?php echo $row->created ?></td>
                         <td><?php echo $icon ?></td>

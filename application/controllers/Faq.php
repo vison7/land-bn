@@ -1,11 +1,11 @@
 <?php
 
-class Templenew extends CI_Controller
+class Faq extends CI_Controller
 {
 
     public $table_name = '';
-    public $content_type = '9';
-    public $view_path = 'templenew';
+    public $content_type = '2';
+    public $view_path = 'faq';
     public $my_temple_id = '';
 
     public function __construct()

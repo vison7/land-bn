@@ -1,20 +1,21 @@
 <div class="page-header">
-    <h1><i class="fa fa-list-alt page-header-icon"></i>&nbsp;&nbsp;วัดบันดาลใจ</h1>
+    <h1><i class="fa fa-list-alt page-header-icon"></i>&nbsp;&nbsp;CASES</h1>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
+
             <div class="panel-heading">
-                <span class="panel-title">Edit Data</span>
+                <span class="panel-title">Create Data</span>
                 <div class="panel-heading-controls">
-                    <button class="btn btn-sm btn-primary btn-outline" onclick="location.href = '<?php echo site_url('templenew') ?>';"><span class="fa fa-chevron-left"></span>&nbsp;&nbsp;Back</button>
+                    <button class="btn btn-sm btn-primary btn-outline" onclick="location.href = '<?php echo site_url('cases') ?>';"><span class="fa fa-chevron-left"></span>&nbsp;&nbsp;Back</button>
                 </div>
             </div>
-            <div class="panel-body">
 
-                <form class="form-horizontal" id="form-validate" action="<?php echo site_url('templenew/edit_data') ?>" role="form" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="<?php echo $query[0]->id ?>">
+            <div class="panel-body">
+                <form class="form-horizontal" id="form-validate" action="<?php echo site_url('cases/add_data') ?>" role="form" method="post" enctype="multipart/form-data">
+
                     <input type="hidden" name="file_list" id="file_list" value="">
                     <input type="hidden" name="lat" id="lat" value="">
                     <input type="hidden" name="lng" id="lng" value="">
@@ -28,159 +29,143 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End .form-group  -->
                     <?php } ?>
 
-                   
+                    <input type="hidden" name="temple_id" id="temple_id" value="<?php echo admin_get_temple() ?>" />
+
                         <div class="form-group">
-                            <label class="col-lg-2 control-label" for="required">ประเภท</label>
+                            <label class="col-lg-2 control-label" for="required">Country</label>
                             <div class="col-lg-3">
                                 <select class="form-control" name="cate_id" id="cate_id">
-                                    <option value="">--เลือก--</option>
-                                    <?php foreach (TEMPLENEW_CATE as $key_cate => $val_cate) { ?>
-                                        <option <?php if ($query[0]->cate_id == $key_cate) { ?>selected="selected" <?php } ?> value="<?php echo $key_cate ?>"><?php echo $val_cate ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label" for="required">ประเภท</label>
-                            <div class="col-lg-3">
-                                <select class="form-control" name="region" id="region">
-                                    <option value="">--เลือก--</option>
-                                    <?php foreach (TEMPLENEW_REGION as $key_cate => $val_cate) { ?>
-                                        <option <?php if ($query[0]->region == $key_cate) { ?>selected="selected" <?php } ?> value="<?php echo $key_cate ?>"><?php echo $val_cate ?></option>
+                                    <option value="">--Country--</option>
+                                    <?php foreach (COUNTRY_CATE as $key_cate => $val_cate) { ?>
+                                        <option value="<?php echo $key_cate ?>"><?php echo $val_cate ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                         </div>
                         
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="title">หัวข้อ</label>
-                        <div class="col-lg-6">
+                        <label class="col-lg-2 control-label" for="title">Name of the Project </label>
+                        <div class="col-lg-8">
                             <input type="text" class="form-control" id="title" name="title" value="<?php echo $query[0]->title ?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="required"></label>
-                        <div class="col-lg-8">
-                            <?php
-                            if ($query[0]->thumb != '') {
-                                echo '<img src="' . base_url() . $query[0]->thumb . '"  border="0" class="img-responsive" />';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label" for="required">รูป </label>
+                        <label class="col-lg-2 control-label" for="required">Thumbnail </label>
                         <div class="col-lg-4">
                             <input type="file" class="form-control" id="thumb" name="thumb">
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="name">รายละเอียดโดยย่อ</label>
+                        <label class="col-lg-2 control-label" for="title">Project Location </label>
                         <div class="col-lg-8">
-                            <textarea cols="70" rows="15" name="description" id="description" style="width:100%;"><?php echo $query[0]->description ?></textarea>
+                            <input type="text" class="form-control" id="location" name="location" value="<?php echo $query[0]->location ?>">
                         </div>
                     </div>
-                    
-                    
+x
+
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="title">แท็ก</label>
+                        <label class="col-lg-2 control-label" for="event_date">Date </label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="event_date" name="event_date" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="title">Parties involved</label>
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" id="tags" name="tags" value="<?php echo $query[0]->tags ?>">
-                            ( คั่นด้วย , )
+                            <input type="text" class="form-control" id="parties_involved" name="parties_involved" value="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="name">รายละเอียด</label>
-                        <div class="col-lg-10">
-                            <textarea cols="70" rows="4" name="detail" id="detail" style="width:100%;"><?php echo $query[0]->detail ?></textarea>
+                        <label class="col-lg-2 control-label" for="the_area">The area </label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="the_area" name="the_area" value="">
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="recommend">แนะนำ</label>
+                        <label class="col-lg-2 control-label" for="how_much_money">How much Money</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="how_much_money" name="how_much_money" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="legal_status">Legal status</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="legal_status" name="legal_status" value="">
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="corruption">Allegation of Corruption</label>
                         <div class="col-lg-8">
-                            <label class="custom-control custom-checkbox checkbox-inline" for="recommend">
-                                <input type="checkbox" value="yes" name="recommend" id="recommend" <?php if ($query[0]->recommend == "yes") { ?>checked="checked" <?php } ?> class="custom-control-input">
-                                Yes
-                            </label>
+                            <textarea cols="70" rows="15" name="corruption" id="corruption" style="width:100%;"></textarea>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="address">ที่อยู่</label>
+                        <label class="col-lg-2 control-label" for="impacts">Impacts to Communities and Actions</label>
                         <div class="col-lg-8">
-                            <textarea cols="70" rows="4" name="address" id="address"><?php echo $query[0]->address ?></textarea>
+                            <textarea cols="70" rows="15" name="impacts" id="impacts" style="width:100%;"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="email">อีเมล์</label>
+                        <label class="col-lg-2 control-label" for="lessons_learn">Lessons Learn</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $query[0]->email ?>">
+                            <textarea cols="70" rows="15" name="lessons_learn" id="lessons_learn" style="width:100%;"></textarea>
                         </div>
                     </div>
+                   
+                    <hr>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="phone">เบอร์โทรศัพท์</label>
+                        <label class="col-lg-2 control-label" for="contact_name">Contact Name </label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $query[0]->phone ?>">
+                            <input type="text" class="form-control" id="contact_name" name="contact_name" value="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="website">เว็บไซต์</label>
+                        <label class="col-lg-2 control-label" for="contact_email">Contact Email</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" id="website" name="website" value="<?php echo $query[0]->website ?>">
+                            <input type="text" class="form-control" id="contact_email" name="contact_email" value="">
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="name">แผนที่ (Embed)</label>
+                        <label class="col-lg-2 control-label" for="contact_org">Contact Organization </label>
                         <div class="col-lg-8">
-                            <?php echo $query[0]->map ?>
+                            <input type="text" class="form-control" id="contact_org" name="contact_org" value="">
                         </div>
                     </div>
+                    
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="name">แผนที่ (Embed)</label>
-                        <div class="col-lg-8">
-                            <textarea cols="70" rows="4" name="map" id="map" style="width:100%;height:150px;"><?php echo $query[0]->map ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label" for="name"></label>
-                        <div class="col-lg-8">
-                            <div id="image_list_edit" style="width:100%;height:350px;border: 1px dashed #ccc;"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label" for="name">รูปภาพ</label>
+                        <label class="col-lg-2 control-label" for="name">Gallery</label>
                         <div class="col-lg-8">
                             <div id="myDropzone" class="my_dropzone">
                                 <div class="dz-default dz-message">
                                     <div class="dz-upload-icon"></div>
                                     Drop files in here<br>
                                     <span class="dz-text-small">or click to pick manually
-                                        <br>คลิกเพื่อเลือกรูป (เลือกได้ 12 รูป)
+                                        <br>(Max 12 images)
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="col-lg-2 control-label" for="text">สถานะ</label>
+                        <label class="col-lg-2 control-label" for="text">Status</label>
                         <div class="col-lg-2">
-                            <select class="form-control" name="is_status" id="is_status">
-                                <option value="publish" <?php if ($query[0]->is_status == "publish") { ?> selected="selected" <?php } ?>>publish</option>
-                                <option value="draft" <?php if ($query[0]->is_status == "draft") { ?> selected="selected" <?php } ?>>draft</option>
+                        <select class="form-control" name="is_status" id="is_status">
+                                <option value="publish" >inprogress</option>
+                                <option value="review">review</option>
+                                <option value="approved">approved</option>
+                                <option value="reject">reject</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-4 col-lg-offset-2">
-                            <?php if (get_admin_login()->is_level != '4') { ?>
-                                <button type="button" class="btn btn-primary" id="startUpload">Save</button>
-                            <?php } ?>
+                            <button type="button" class="btn btn-primary" id="startUpload">Save</button>
                             <button type="button" class="btn btn-default" id="btn_back">Back</button>
                         </div>
                     </div>
@@ -192,43 +177,21 @@
     <!-- End .span12 -->
 </div>
 <!-- End .row -->
+
 <script type="text/javascript">
     var ff = null;
     init.push(function() {
         $('#btn_back').click(function() {
-            location.href = '<?php echo site_url('templenew') ?>';
+            location.href = '<?php echo site_url('cases') ?>';
         });
 
         $('#event_date,#event_end_date').datepicker({
             format: 'yyyy-mm-dd'
         });
+
         tinyInit('textarea#detail');
-        list_image();
-
-
+        //initMap('map');
     }); //End document ready functions
-
-    function list_image() {
-
-        $.get("<?php echo site_url('templenew/list_file/' . $query[0]->id) ?>", function(data) {
-            $("#image_list_edit").html(data);
-        });
-    }
-
-    function delete_file(id, path) {
-        if (confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')) {
-            $.ajax({
-                method: "POST",
-                url: "<?php echo site_url('templenew/delete_file/' . $query[0]->id) ?>",
-                data: {
-                    pos: id
-                }
-            }).done(function(msg) {
-                alert("Data Saved: " + msg);
-                list_image();
-            });
-        }
-    }
 
 
     $(function() {
@@ -236,7 +199,7 @@
         var image_obj = [];
         //Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone("div#myDropzone", {
-            url: "<?php echo site_url('templenew/upload') ?>",
+            url: "<?php echo site_url('cases/upload') ?>",
             paramName: "file",
             autoProcessQueue: false,
             uploadMultiple: false, // uplaod files in a single request
@@ -248,8 +211,8 @@
             // Language Strings
             dictFileTooBig: "File is to big ({{filesize}}mb). Max allowed file size is {{maxFilesize}}mb",
             dictInvalidFileType: "Invalid File Type",
-            dictCancelUpload: "Cancel",
-            dictRemoveFile: "Remove",
+            //dictCancelUpload: "Cancel",
+            //dictRemoveFile: "Remove",
             dictMaxFilesExceeded: "Only {{maxFiles}} files are allowed",
             dictDefaultMessage: "Drop files here to upload",
             init: function() {
@@ -294,12 +257,15 @@
         });
 
         $('#startUpload').click(function() {
-
             var fff = $("#form-validate");
             fff.validate({
                 ignore: 'input[type="hidden"]',
                 rules: {
-                    title: "required"
+                    title: "required",
+                    thumb: {
+                        required: true,
+                        accept: "image/*"
+                    }
                 }
             });
 
@@ -319,6 +285,7 @@
 
     });
 </script>
+
 <script type="text/javascript" src="<?php echo base_url() ?>assets/tinymce4/tinymce.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/tinymce4/tiny_init.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/admin/javascripts/map.js"></script>

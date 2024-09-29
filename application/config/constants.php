@@ -88,14 +88,7 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 define('PATH_FILE_IMAGE', 'data/img/');
 
 // redirect verify email
-switch ($_SERVER['SERVER_NAME']) {
-  case 'bn.watbundanjai.org':
-    define('VERIFY_EMAIL', 'https://watbundanjai.org/member/verify');
-    break;
-  default:
-    define('VERIFY_EMAIL', 'http://localhost/wat-fn/member/verify');
-    break;
-}
+
 
 // Temple category
 define('TEMPLE_CATE', array('1' => 'วัดในโครงการ', '2' => 'เว็ปไซต์วัด ICT', '3' => 'วัดพื้นที่การเรียนรู้'));
@@ -261,16 +254,24 @@ define('SLIDE_CATE', array(
   '4' => 'สื่อของโครงการ'
 ));
 
-define('TEMPLENEW_CATE', array(
-  '1' => 'วัดในโครงการ',
-  '2' => 'วัดกรณีศึกษา',
-  '3' => 'วัดศูนย์การเรียนรู้',
-  '4' => 'วัดพื้นที่สุขภาวะสร้างสรรค์'
-));
+
 
 define('TEMPLENEW_REGION', array(
   'northern' => 'ภาคเหนือ',
   'northeastern' => 'ภาคตะวันออกเฉียงเหนือ',
   'central' => 'ภาคกลาง',
   'southern' => 'ภาคใต้'
+));
+
+// Land
+define('FAQ_CATE', array(
+  '1' => 'Cate 1',
+  '2' => 'Cate 2',
+  '3' => 'Cate 3',
+));
+
+define('COUNTRY_CATE', array(
+  '1' => 'Thailand',
+  '2' => 'Indonesia',
+  '3' => 'Malaysia',
 ));

@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1><i class="fa fa-user page-header-icon"></i>&nbsp;&nbsp;ระบบจัดการผู้ใช้ระบบ</h1>
+    <h1><i class="fa fa-user page-header-icon"></i>&nbsp;&nbsp;Users</h1>
 </div>
 
 <div class="row">
@@ -54,18 +54,6 @@
                         </div>
                     </div><!-- End .form-group  -->
                     
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label" for="required">Temple</label>
-                        <div class="col-lg-3">
-                            <select class="form-control" name="temple_id" id="temple_id">
-                                <option value="0">Main Site</option>
-                                <?php foreach($temple as $row_t){?>
-                                <option value="<?php echo $row_t->id?>"><?php echo $row_t->name?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </div><!-- End .form-group  -->
-
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="required">Permission</label>
                         <div class="col-lg-3">

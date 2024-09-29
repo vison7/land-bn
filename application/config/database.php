@@ -76,15 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	
-	// 'hostname' => 'localhost',
-	// 'username' => 'zsxkpszw_user',
-	// 'password' => '[^TPD3FhydBQ',
-	// 'database' => 'zsxkpszw_wat',
+	'hostname' => 'localhost',
+	'username' => 'zkzkpszw_land',
+	'password' => '7Ys9OQ&t(tLO',
+	'database' => 'zkzkpszw_land',
 
-	'hostname' => 'land_db',
-	'username' => 'user',
-	'password' => 'root',
-	'database' => 'land',
+	// 'hostname' => 'land_db',
+	// 'username' => 'user',
+	// 'password' => 'root',
+	// 'database' => 'land',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

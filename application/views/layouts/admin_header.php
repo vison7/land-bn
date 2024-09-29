@@ -132,7 +132,7 @@
                     </div>
 
                     <ul class="navigation">
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo site_url('slide') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">สไลด์โชว์</span></a>
                         </li>
                         <li>
@@ -151,8 +151,8 @@
                                 <li><a href="<?php echo site_url('sandbox2') ?>"><span class="mm-text">Sandbox ต่างจังหวัด</span></a></li>
                                 <li><a href="<?php echo site_url('sandbox3') ?>"><span class="mm-text">โมเดล Health Station</span></a></li>
                             </ul>
-                        </li>
-                        <li class="mm-dropdown mm-dropdown-root open">
+                        </li> -->
+                        <!-- <li class="mm-dropdown mm-dropdown-root open">
                             <a href="#"><i class="menu-icon fa fa-camera-retro"></i><span class="mm-text">สื่อของโครงการ</span></a>
                             <ul class="mmc-dropdown-delay animated fadeInLeft">
                             <li><a href="<?php echo site_url('mediaarticle') ?>"><span class="mm-text">บทความ</span></a></li>
@@ -161,73 +161,23 @@
                                 <li><a href="<?php echo site_url('sound') ?>"><span class="mm-text">เสียง</span></a></li>
                                 <li><a href="<?php echo site_url('ebook') ?>"><span class="mm-text">อีบุ๊ค</span></a></li>
                             </ul>
-                        </li>
-                        <li>
+                        </li> -->
+                        <!-- <li>
                             <a href="<?php echo site_url('Volunteercom') ?>"><i class="menu-icon fa fa-calendar-o"></i><span class="mm-text">จิตอาสา</span></a>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('knowledge') ?>"><i class="menu-icon fa fa-leaf"></i><span class="mm-text">องค์ความรู้</span></a>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('templenew') ?>"><i class="menu-icon fa fa-leaf"></i><span class="mm-text">วัดบันดาลใจ</span></a>
-                        </li>
-
-                        <!-- <li>
-                            <a href="<?php echo site_url('course') ?>"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">หลักสูตรวัดบันดาลใจ</span></a>
                         </li> -->
-                        
-                        <!-- <?php if (get_admin_login()->is_level == '1' || (get_admin_login()->is_level == '2' && get_admin_login()->temple_id == '0' )) { ?>
                         <li>
-                            <a href="<?php echo site_url('banner') ?>"><i class="menu-icon fa fa-th-list"></i><span class="mm-text">สื่อแนะนำ</span></a>
+                            <a href="<?php echo site_url('faq') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">FAQ</span></a>
                         </li>
-                        <?php }?> -->
-                        
-                        <!-- <li>
-                            <a href="<?php echo site_url('contactus') ?>"><i class="menu-icon fa fa-edit"></i><span class="mm-text">ระบบจัดการติดต่อเรา</span></a>
-                        </li>  -->
-
-                        <?php if (get_admin_login()->is_level == '1' || (get_admin_login()->is_level == '2' && get_admin_login()->temple_id == '0' )) { ?>
-                        <!-- <li>
-                            <a href="<?php echo site_url('member') ?>"><i class="menu-icon fa fa-users"></i><span class="mm-text">ระบบจัดการสมาชิก</span></a>
-                        </li> -->
-                        <?php }?>
-<!--                         
-                        <?php if (get_admin_login()->is_level == '1' || ((get_admin_login()->is_level == '2' || get_admin_login()->is_level == '3') && get_admin_login()->temple_id == '0' )) { ?>
                         <li>
-                            <a href="<?php echo site_url('templeall') ?>"><i class="menu-icon fa fa-circle-o"></i><span class="mm-text">วัดทั้งหมด</span></a>
+                            <a href="<?php echo site_url('cases') ?>"><i class="menu-icon fa fa-leaf"></i><span class="mm-text">CASES</span></a>
                         </li>
-                        <?php }?> -->
 
-                        <?php if (get_admin_login()->is_level == '1' || (get_admin_login()->is_level == '2' && get_admin_login()->temple_id == '0' )) { ?>
-                        <!-- <li>
-                            <a href="<?php echo site_url('volunteerall') ?>"><i class="menu-icon fa fa-user"></i><span class="mm-text">ระบบจัดการอาสาสมัคร</span></a>
-                        </li>    
-                        <li>
-                            <a href="<?php echo site_url('volunteerskills') ?>"><i class="menu-icon fa fa-user"></i><span class="mm-text">จิตอาสาตามทักษะ</span></a>
-                        </li>  -->
-                        <!-- <li>
-                            <a href="<?php echo site_url('volunteersub') ?>"><i class="menu-icon fa fa-user"></i><span class="mm-text">สมัครข่าวสารโครงการ</span></a>
-                        </li>  -->
-                        <!-- <li>
-                            <a href="<?php echo site_url('volunteerwat') ?>"><i class="menu-icon fa fa-user"></i><span class="mm-text">วัดนำร่อง</span></a>
-                        </li>   -->
-                        <?php } ?>
-                        <!-- <?php if (get_admin_login()->is_level == '1' || (get_admin_login()->is_level == '2' && get_admin_login()->temple_id == '0' )) { ?>
-                        <li>
-                            <a href="<?php echo site_url('temple') ?>"><i class="menu-icon fa fa-sun-o"></i><span class="mm-text">ระบบจัดการวัด</span></a>
-                        </li>    
-                        <?php } ?> -->
-
-                        <!-- <?php if (get_admin_login()->is_level == '2' && get_admin_login()->temple_id != '0' ) { ?>
-                        <li>
-                            <a href="<?php echo site_url('temple/edit_my_temple/') ?>"><i class="menu-icon fa fa-sun-o"></i><span class="mm-text">การตั้งค่าการแสดงผล</span></a>
-                        </li>    
-                        <?php } ?> -->
+                       
 
                         <?php if (get_admin_login()->is_level == '1') { ?>
                         <li>
                             <a href="<?php echo site_url('user') ?>">
-                            <i class="menu-icon fa fa-user"></i><span class="mm-text">ระบบจัดการผู้ใช้ระบบ</span>
+                            <i class="menu-icon fa fa-user"></i><span class="mm-text">Users</span>
                             </a>
                         </li>
                         <?php } ?>
