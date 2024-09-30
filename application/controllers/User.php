@@ -19,9 +19,8 @@ class User extends CI_Controller {
         $page_size = 20;
         $offset = ($page_size * $page_no) - $page_size;
 
-        $this->db->select('t1.*,t2.name AS temple_name');
+        $this->db->select('t1.*');
         $this->db->from($this->db->dbprefix('users').' t1');
-        $this->db->join($this->db->dbprefix('temples') .' t2', 't1.temple_id = t2.id', 'left');
         $this->db->where('t1.is_level !=', '1');
         $this->db->limit($page_size, $offset);
         $this->db->order_by("t1.id", "desc");
@@ -53,7 +52,6 @@ class User extends CI_Controller {
         ));
 
         $data['permission'] = $this->permission;
-        $data['temple'] = $this->temples();
 
         $this->load->view('layouts/admin_header');
         $this->load->view('user/add',$data);
@@ -124,7 +122,6 @@ class User extends CI_Controller {
         ));
 
         $data['permission'] = $this->permission;
-        $data['temple'] = $this->temples();
 
         $query = $this->db->get_where($this->db->dbprefix('users'), array(
             'id' => $id

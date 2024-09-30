@@ -152,26 +152,13 @@
                                 <li><a href="<?php echo site_url('sandbox3') ?>"><span class="mm-text">โมเดล Health Station</span></a></li>
                             </ul>
                         </li> -->
-                        <!-- <li class="mm-dropdown mm-dropdown-root open">
-                            <a href="#"><i class="menu-icon fa fa-camera-retro"></i><span class="mm-text">สื่อของโครงการ</span></a>
-                            <ul class="mmc-dropdown-delay animated fadeInLeft">
-                            <li><a href="<?php echo site_url('mediaarticle') ?>"><span class="mm-text">บทความ</span></a></li>
-                                <li><a href="<?php echo site_url('media') ?>"><span class="mm-text">วิดีโอ</span></a></li>
-                                <li><a href="<?php echo site_url('photo') ?>"><span class="mm-text">รูปภาพ</span></a></li>
-                                <li><a href="<?php echo site_url('sound') ?>"><span class="mm-text">เสียง</span></a></li>
-                                <li><a href="<?php echo site_url('ebook') ?>"><span class="mm-text">อีบุ๊ค</span></a></li>
-                            </ul>
-                        </li> -->
-                        <!-- <li>
-                            <a href="<?php echo site_url('Volunteercom') ?>"><i class="menu-icon fa fa-calendar-o"></i><span class="mm-text">จิตอาสา</span></a>
-                        </li> -->
+                        
                         <li>
                             <a href="<?php echo site_url('faq') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">FAQ</span></a>
                         </li>
                         <li>
                             <a href="<?php echo site_url('cases') ?>"><i class="menu-icon fa fa-leaf"></i><span class="mm-text">CASES</span></a>
                         </li>
-
                        
 
                         <?php if (get_admin_login()->is_level == '1') { ?>

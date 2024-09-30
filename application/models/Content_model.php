@@ -26,7 +26,7 @@ class Content_model extends CI_Model
         // search
         $this->db->select('id,content_type,temple_id,cate_id,title,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb,description,event_date,event_end_date,publish_date,location,created,modified'. $select_field);
         $this->db->from($table);
-        $this->db->where('is_status', 'publish');
+        // $this->db->where('is_status', 'publish');
 
         if (isset($keyword['temple_id']) && $keyword['temple_id'] != '') {
             $this->db->where('temple_id', $keyword['temple_id']);
@@ -77,7 +77,7 @@ class Content_model extends CI_Model
 
         // count all
         $this->db->from($table);
-        $this->db->where('is_status', 'publish');
+        // $this->db->where('is_status', 'publish');
         if (isset($keyword['temple_id']) && $keyword['temple_id'] != '') {
             $this->db->where('temple_id', $keyword['temple_id']);
         }
@@ -125,7 +125,7 @@ class Content_model extends CI_Model
 
         $this->db->select('*,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb');
         $query = $this->db->get_where($table, array(
-            "id" => $id, 'is_status' => 'publish',
+            "id" => $id, 
         ));
 
         $ret = $query->result();

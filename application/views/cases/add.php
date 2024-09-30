@@ -64,8 +64,6 @@
                             <input type="text" class="form-control" id="location" name="location" value="<?php echo $query[0]->location ?>">
                         </div>
                     </div>
-x
-
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="event_date">Date </label>
                         <div class="col-lg-3">

@@ -40,9 +40,8 @@ class Faq extends CI_Controller
         $cate_id = (isset($_REQUEST['cate_id'])) ? $_REQUEST['cate_id'] : '';
 
         // select
-        $this->db->select('t1.*,t2.name AS temple_name');
+        $this->db->select('t1.*');
         $this->db->from($this->table_name . ' t1');
-        $this->db->join($this->db->dbprefix('temples') . ' t2', 't1.temple_id = t2.id', 'left');
         $this->db->where('content_type', $this->content_type);
         if ($temple_id !='') {
             $this->db->where('t1.temple_id', $temple_id);
@@ -81,8 +80,8 @@ class Faq extends CI_Controller
 
         $data['str_query'] = "";
 
-        $this->load->model('common_model');
-        $data['temple'] = $this->common_model->temples();
+        // $this->load->model('common_model');
+        // $data['temple'] = $this->common_model->temples();
 
         $this->load->view('layouts/admin_header');
         $this->load->view($this->view_path . '/index', $data);
@@ -91,11 +90,8 @@ class Faq extends CI_Controller
 
     public function add()
     {
-        $this->load->model('common_model');
-        $data['temple'] = $this->common_model->temples();
-
         $this->load->view('layouts/admin_header');
-        $this->load->view($this->view_path . '/add', $data);
+        $this->load->view($this->view_path . '/add');
         $this->load->view('layouts/admin_footer');
     }
 
@@ -159,9 +155,6 @@ class Faq extends CI_Controller
 
     public function edit($id = '')
     {
-        $this->load->model('common_model');
-        $data['temple'] = $this->common_model->temples();
-
         $query = $this->db->get_where($this->table_name, array(
             'id' => $id,
         ), 1);
