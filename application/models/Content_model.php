@@ -65,8 +65,8 @@ class Content_model extends CI_Model
         if (isset($keyword['hit']) && !empty($keyword['hit'])) {
             $this->db->order_by("count_views", "DESC");
         } else {
-            $this->db->order_by("publish_date", "DESC");
             $this->db->order_by("id", "DESC");
+            // $this->db->order_by("publish_date", "DESC");
         }
 
         $this->db->limit($page_size, $offset);
@@ -204,92 +204,23 @@ class Content_model extends CI_Model
 
         return $data;
     }
-    public function get_watdetail($slug)
+    
+    public function submit_case($data)
     {
-        $this->db->select('id,slug,name,slogan,logo,bg_header,author,location,email,phone,website,youtube,facebook,CONCAT( \'' . base_url() . '\',`logo` ) AS logo, CONCAT( \'' . base_url() . '\',`bg_header` ) AS bg_header');
-        $table = $this->db->dbprefix('temples');
-        $query = $this->db->get_where($table, array(
-            "slug" => $slug, 'is_status' => 'publish',
-        ));
+        $table = $this->db->dbprefix('contents');
+        $data['created'] = date('Y-m-d H:i:s');
+        //$res = array('code' => 200, 'message' => 'OK','data'=>$data);
 
-        $data['data'] = $query->result();
-        return $data;
-    }
-    public function get_watdetail_all($slug)
-    {
-        $this->db->select('*,CONCAT( \'' . base_url() . '\',`logo` ) AS logo, CONCAT( \'' . base_url() . '\',`bg_header` ) AS bg_header');
-        $table = $this->db->dbprefix('temples');
-        $query = $this->db->get_where($table, array(
-            "slug" => $slug, 'is_status' => 'publish',
-        ));
+        // print_r($data);
+        $res = array('code' => 200, 'message' => $data);
+        if (@$this->db->insert($table, $data)) {
+            $res = array('code' => 200, 'message' => 'OK');
+        } else {
+            $res = array('code' => 500, 'message' => 'Internal server error');
+        }
+        return $res;
 
-        $data['data'] = $query->result();
-        return $data;
     }
 
-    public function get_temple($page_size = 10, $page_no = 1, $keyword = array())
-    {
-        $table = $this->db->dbprefix('temple_all');
-
-        // get page
-        $offset = ($page_size * $page_no) - $page_size;
-
-        // search
-        $this->db->select('id,cate_id,zone,address,external_link,website,name,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb,description,created,modified');
-        $this->db->from($table);
-        $this->db->where('is_status', 'publish');
-
-        if (isset($keyword['cate_id']) && !empty($keyword['cate_id'])) {
-            $this->db->where('cate_id', $keyword['cate_id']);
-        }
-        if (isset($keyword['zone']) && !empty($keyword['zone'])) {
-            $this->db->where('zone', $keyword['zone']);
-        }
-        if (isset($keyword['highlight']) && !empty($keyword['highlight'])) {
-            $this->db->where('highlight', $keyword['highlight']);
-        }
-
-        $this->db->limit($page_size, $offset);
-        $this->db->order_by("publish_date", "DESC");
-        $this->db->order_by("id", "DESC");
-        $data['data'] = $this->db->get()->result();
-        //print $this->db->last_query();
-
-        // count all
-        $this->db->from($table);
-        $this->db->where('is_status', 'publish');
-        if (isset($keyword['cate_id']) && !empty($keyword['cate_id'])) {
-            $this->db->where('cate_id', $keyword['cate_id']);
-        }
-        if (isset($keyword['zone']) && !empty($keyword['zone'])) {
-            $this->db->where('zone', $keyword['zone']);
-        }
-        if (isset($keyword['highlight']) && !empty($keyword['highlight'])) {
-            $this->db->where('highlight', $keyword['highlight']);
-        }
-        $count_all = $this->db->count_all_results();
-
-        // paging config
-        $data['paging']['total_item'] = $count_all;
-        $data['paging']['page_size'] = $page_size;
-        $data['paging']['page_no'] = $page_no;
-        // total page
-        $page_total = ceil($count_all / $page_size);
-        $data['paging']['page_total'] = $page_total;
-
-        return $data;
-    }
-
-    public function get_templedetail($id)
-    {
-        $table = $this->db->dbprefix('temple_all');
-        $this->db->select('*,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb');
-        $query = $this->db->get_where($table, array(
-            "id" => $id, 'is_status' => 'publish',
-        ));
-
-        $data['data'] = $query->result();
-
-        return $data;
-    }
+   
 }
