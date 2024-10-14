@@ -11,6 +11,7 @@ if (!empty($gallery)) {
 
 <?php
 for ($i=0;$i<count($arr_gallery);$i++) {
+    if(!empty($arr_gallery[$i])){
     $thumb = base_url(). $arr_gallery[$i];
     ?>
             <div class="col-sm-3 col-md-2" id="boximg_<?php echo $i ?>" style="margin-bottom:10px">
@@ -21,4 +22,4 @@ for ($i=0;$i<count($arr_gallery);$i++) {
                     <a href="javascript:delete_file('<?php echo $i ?>','<?php echo $arr_gallery[$i]?>');" class="label label-primary">Delete</a>
                 </div>
             </div>
-<?php }?>
+<?php } }?>

@@ -27,11 +27,11 @@ class Content extends REST_Controller
         $notin = array();
         $fields = array();
 
+        if (!empty($this->get('is_status'))) {
+            $search['is_status'] = $this->get('is_status');
+        }
         if (!empty($this->get('content_type'))) {
             $search['content_type'] = $this->get('content_type');
-        }
-        if ($this->get('temple_id') != '') {
-            $search['temple_id'] = $this->get('temple_id');
         }
         if (!empty($this->get('cate_id'))) {
             $search['cate_id'] = $this->get('cate_id');
@@ -57,9 +57,7 @@ class Content extends REST_Controller
         if (!empty($this->get('sort_event_date'))) {
             $sort['event_date'] = $this->get('sort_event_date');
         }
-        if ($this->get('notin_temple_id') != '') {
-            $notin['temple_id'] = $this->get('notin_temple_id');
-        }
+
         if ($this->get('notin_cate_id') != '') {
             $notin['cate_id'] = $this->get('notin_cate_id');
         }
@@ -118,6 +116,49 @@ class Content extends REST_Controller
         $_POST['thumb'] = $thumb_url;
 
         $res = $this->content_model->submit_case($_POST);
+        $this->response($res);
+    }
+
+    public function banner_get()
+    {
+        $this->load->model('content_model');
+        // params
+        $page_no = (isset($_REQUEST['page_no'])) ? $_REQUEST['page_no'] : 1;
+        $page_size = (isset($_REQUEST['page_size'])) ? $_REQUEST['page_size'] : 10;
+        $search = array();
+        if (!empty($this->get('content_type'))) {
+            $search['content_type'] = $this->get('content_type');
+        }
+        if ($this->get('is_status') != '') {
+            $search['is_status'] = $this->get('is_status');
+        }
+        if (!empty($this->get('cate_id'))) {
+            $search['cate_id'] = $this->get('cate_id');
+        }
+        if (!empty($this->get('old'))) {
+            $search['old'] = $this->get('old');
+        }
+        $data = $this->content_model->get_banner($page_size, $page_no, $search);
+
+        if (isset($data['data']) && !empty($data['data'])) {
+            $res = array('code' => 200, 'paging' => $data['paging'], 'data' => $data['data']);
+        } else {
+            $res = array('code' => 200, 'paging' => $data['paging'], 'message' => 'No data', 'data' => array());
+        }
+        $this->response($res);
+    }
+
+    public function bannerdetail_get()
+    {
+        $id = $this->get('id');
+        $this->load->model('content_model');
+        $data = $this->content_model->get_bannerdetail($id);
+
+        if (isset($data['data']) && !empty($data['data'])) {
+            $res = array('code' => 200, 'data' => $data['data']);
+        } else {
+            $res = array('code' => 200, 'message' => 'No data', 'data' => array());
+        }
         $this->response($res);
     }
 

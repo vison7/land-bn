@@ -7,23 +7,22 @@ $page = array(
 );
 ?>
 <div class="page-header">
-    <h1><i class="fa fa-list-alt page-header-icon"></i>&nbsp;&nbsp;Sandbox ต่างจังหวัด</h1>
+    <h1><i class="fa fa-list-alt page-header-icon"></i>&nbsp;&nbsp;Our partner</h1>
 </div>
 
 <div class="panel colourable">
 	<div class="panel-body">
     <form id="frm-search" name="frm-search" method="post">
-
-        <!-- <div class="col-lg-3">
-            <select class="form-control" name="cate_id" id="cate_id">
-                <option value="">--เลือกประเภท--</option>
-                <?php foreach (MEDIA_CATE as $key_cate => $val_cate) {?>
-                <option value="<?php echo $key_cate ?>"><?php echo $val_cate ?></option>
-                <?php }?>
-                </select>
-        </div> -->
         <div class="col-lg-3">
-            <input type="text" class="form-control" id="title" name="title" placeholder="หัวข้อ">
+        <select class="form-control" name="cate_id" id="cate_id">
+                    <option value="">-- Select Category --</option>
+                    <?php foreach (PARTNER_CATE as $key_cate => $val_cate) { ?>
+                        <option value="<?php echo $key_cate ?>"><?php echo $val_cate ?></option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
         </div>
         <div class="col-lg-2">
             <button type="submit" class="btn btn-primary">Search</button>
@@ -32,10 +31,11 @@ $page = array(
     </div>
 </div>
 
-<div class="panel">
+
+<div class="panel no-border-l no-border-r">
     <!-- Default panel contents -->
     <?php if(get_admin_login()->is_level!='4'){?>
-    <div class="panel-heading">
+    <div class="panel-heading bordered">
         <span class="panel-title">
             <div class="btn-group btn-group-sm">
                 <button data-toggle="dropdown" type="button"
@@ -52,7 +52,7 @@ $page = array(
                 <!-- / .dropdown-menu -->
             </div> <!-- / .btn-group -->
             <button type="button" class="btn btn-sm btn-primary"
-                    onclick="location.href = '<?php echo site_url('sandbox2/add'); ?>';">
+                    onclick="location.href = '<?php echo site_url('partner/add'); ?>';">
                 <span class="fa fa-plus-circle"></span>&nbsp;Add
             </button>
 
@@ -65,12 +65,12 @@ $page = array(
     <form id="frm" name="frm" method="post">
         <input type='hidden' id="id" name="id" value="">
         <!-- Table -->
-        <table class="table table-bordered" style="margin-bottom:0">
+        <table class="table table-bordered no-border-vr">
             <thead>
                 <tr>
                     <th><input type="checkbox" onclick="selectAll(this, 'idx')"></th>
                     <th>#</th>
-                    <th>Title</th>
+                    <th>Thumb</th>
                     <th>Date</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -85,23 +85,22 @@ $page = array(
 
                     $thumb = '';
                     if ($row->thumb != '') {
-                        $thumb = '<img src="' . base_url() . $row->thumb . '"  border="0" class="img-responsive" />';
+                        $thumb = '<img class="img-responsive" src="' . base_url() . $row->thumb . '"  border="0"   />';
                     }
                     ?>
                     <tr>
-                        <td><input type="checkbox" name="idx" id="idx" value="<?php echo $row->id ?>" /></td>
+                        <td><input type="checkbox" name="idx" id="idx"
+                                   value="<?php echo $row->id ?>" /></td>
                         <td><?php echo $row->id ?></td>
-                        <td style="width:40%"><?php echo $thumb ?><br>
+                        <td style="width: 40%; "><?php echo $thumb ?><br>
                             <?php echo $row->title ?><br>
+                            <span class="label label-default"><?php echo @PARTNER_CATE[$row->cate_id] ?></span>
                         </td>
-                        <td>
-                        วันที่แสดง : <?php echo $row->publish_date ?><br>
-                        สร้าง : <?php echo $row->created ?>
-                        </td>
+                        <td><?php echo $row->created ?></td>
                         <td><?php echo $icon ?></td>
                         <td>
                             <button type="button" class="btn btn-xs btn-labeled btn-info"
-                                    onclick="location.href = '<?php echo site_url('sandbox2/edit/' . $row->id) ?>';">
+                                    onclick="location.href = '<?php echo site_url('partner/edit/' . $row->id) ?>';">
                                 <span class="btn-label icon fa fa-edit"></span>
                                 <?php if(get_admin_login()->is_level!='4'){?>
                                 Edit
@@ -116,7 +115,7 @@ $page = array(
         </table>
     </form>
 
-    <div class="panel-footer">
+    <div class="table-footer ">
         <?php $this->load->view("elements/admin_paging", $page) ?>
     </div>
 </div>
@@ -131,7 +130,7 @@ $page = array(
 
         if (chkId != '') {
             $('#frm #id').val(chkId);
-            var action = '<?php echo site_url('sandbox2/set_status') ?>/' + status;
+            var action = '<?php echo site_url('partner/set_status') ?>/' + status;
             // compute action here...
             $('#frm').attr('action', action);
             $('#frm').submit();
@@ -148,7 +147,7 @@ $page = array(
         if (chkId != '') {
             if (confirm('What do you want to delete?')) {
                 $('#frm #id').val(chkId);
-                var action = '<?php echo site_url('sandbox2/data_delete') ?>';
+                var action = '<?php echo site_url('partner/data_delete') ?>';
                 // compute action here...
                 $('#frm').attr('action', action);
                 $('#frm').submit();

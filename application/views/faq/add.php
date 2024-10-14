@@ -110,7 +110,7 @@
                         </div>
                     </div> -->
                     
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label class="col-lg-2 control-label" for="name">รูปภาพ</label>
                         <div class="col-lg-8">
                             <div id="myDropzone" class="my_dropzone">
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="text">Status</label>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-4 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary" id="startUpload">Save</button>
+                            <button type="button" class="btn btn-primary" id="startUpload">Save</button>
                             <button type="button" class="btn btn-default" id="btn_back">Back</button>
                         </div>
                     </div>
@@ -156,24 +156,105 @@
             location.href = '<?php echo site_url('faq') ?>';
         });
 
-        $("#form-validate").validate({
-            ignore: 'input[type="hidden"]',
-            rules: {
-                title: "required",
-                thumb: {
-                    required: true,
-                    accept: "image/*"
-                },
-            },
-            submitHandler: function (form) {
-                // if (confirm('คุณแน่ใจที่จะ publish บทความหรือไม่ ?'))
-                form.submit();
-            }
-        });
+        // $("#form-validate").validate({
+        //     ignore: 'input[type="hidden"]',
+        //     rules: {
+        //         title: "required",
+        //         thumb: {
+        //             required: true,
+        //             accept: "image/*"
+        //         },
+        //     },
+        //     submitHandler: function (form) {
+        //         form.submit();
+        //     }
+        // });
 
         tinyInit('textarea#detail');
         //initMap('map');
     }); //End document ready functions
+
+
+    $(function() {
+        var image_list = '';
+        var image_obj = [];
+        //Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("div#myDropzone", {
+            url: "<?php echo site_url('faq/upload') ?>",
+            paramName: "file",
+            autoProcessQueue: false,
+            uploadMultiple: false, // uplaod files in a single request
+            parallelUploads: 100,
+            maxFilesize: 1, // MB
+            maxFiles: 10,
+            acceptedFiles: ".jpg, .jpeg, .png, .gif, .pdf",
+            addRemoveLinks: true,
+            // Language Strings
+            dictFileTooBig: "File is to big ({{filesize}}mb). Max allowed file size is {{maxFilesize}}mb",
+            dictInvalidFileType: "Invalid File Type",
+            //dictCancelUpload: "Cancel",
+            //dictRemoveFile: "Remove",
+            dictMaxFilesExceeded: "Only {{maxFiles}} files are allowed",
+            dictDefaultMessage: "Drop files here to upload",
+            init: function() {
+                console.log('init');
+                this.on("maxfilesexceeded", function(file) {
+                    alert("No more files please!");
+                    this.removeFile(file);
+                });
+            }
+        });
+
+        myDropzone.on("addedfile", function(file) {
+            //console.log('addedfile',file);
+        });
+        myDropzone.on("sending", function(file, xhr, formData) {
+            // Will send the filesize along with the file as POST data.
+            //formData.append("filesize", file.size);
+            //console.log('sending',file);
+        });
+        myDropzone.on("error", function(file, response) {
+            console.log('error', response);
+        });
+        myDropzone.on("success", function(file, xhr) {
+            //console.log('success',file);
+            if (xhr.code == 200) {
+                image_obj.push(xhr.path);
+            }
+
+            console.log('success xhr', xhr);
+        });
+        myDropzone.on("queuecomplete", function() {
+            
+            $("#file_list").val(JSON.stringify(image_obj));
+            console.log(image_obj);
+            console.log('queuecomplete');
+            $("#form-validate").submit();
+        });
+
+        $('#startUpload').click(function() {
+            var fff = $("#form-validate");
+            fff.validate({
+                ignore: 'input[type="hidden"]',
+                rules: {
+                    title: "required",
+                    thumb: {
+                        required: true,
+                        accept: "image/*"
+                    }
+                }
+            });
+
+            if (myDropzone.files != "") {
+                if (fff.valid())
+                    myDropzone.processQueue();
+            } else {
+                if (fff.valid())
+                    $("#form-validate").submit();
+            }
+        });
+
+    });
 
 </script>
 

@@ -130,28 +130,9 @@
                             <!--a href="#" class="close">&times;</a-->
                         </div>
                     </div>
-
+                    
                     <ul class="navigation">
-                        <!-- <li>
-                            <a href="<?php echo site_url('slide') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">สไลด์โชว์</span></a>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('activity') ?>"><i class="menu-icon fa fa-calendar-o"></i><span class="mm-text">กิจกรรม</span></a>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('about') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">เกี่ยวกับเรา</span></a>
-                        </li>
                         
-                        <li class="mm-dropdown mm-dropdown-root open">
-                            <a href="#"><i class="menu-icon fa fa-camera-retro"></i><span class="mm-text">พื้นที่สุขภาวะสร้างสรรค์</span></a>
-                            <ul class="mmc-dropdown-delay animated fadeInLeft">
-                                <li><a href="<?php echo site_url('sandbox1/edit2/15') ?>"><span class="mm-text">แก้ไขพื้นที่สุขภาวะสร้างสรรค์</span></a></li>
-                                <li></li>
-                                <li><a href="<?php echo site_url('sandbox1') ?>"><span class="mm-text">Sandbox กรุงเทพมหานคร</span></a></li>
-                                <li><a href="<?php echo site_url('sandbox2') ?>"><span class="mm-text">Sandbox ต่างจังหวัด</span></a></li>
-                                <li><a href="<?php echo site_url('sandbox3') ?>"><span class="mm-text">โมเดล Health Station</span></a></li>
-                            </ul>
-                        </li> -->
                         
                         <li>
                             <a href="<?php echo site_url('faq') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">FAQ</span></a>
@@ -159,7 +140,9 @@
                         <li>
                             <a href="<?php echo site_url('cases') ?>"><i class="menu-icon fa fa-leaf"></i><span class="mm-text">CASES</span></a>
                         </li>
-                       
+                        <li>
+                            <a href="<?php echo site_url('partner') ?>"><i class="menu-icon fa fa-tasks"></i><span class="mm-text">Our partners</span></a>
+                        </li>
 
                         <?php if (get_admin_login()->is_level == '1') { ?>
                         <li>

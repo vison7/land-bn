@@ -83,7 +83,26 @@
                         </div>
                     </div>
 
-                   
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" ></label>
+                        <div class="col-lg-8">
+                            <div id="image_list_edit" style="width:100%;height:350px;border: 1px dashed #ccc;"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" >Gallery</label>
+                        <div class="col-lg-8">
+                            <div id="myDropzone" class="my_dropzone">
+                                <div class="dz-default dz-message">
+                                    <div class="dz-upload-icon"></div>
+                                    Drop files in here<br>
+                                    <span class="dz-text-small">or click to pick manually
+                                        <br>(Max 12 Images)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label" for="text">Status</label>
                         <div class="col-lg-2">
@@ -96,7 +115,7 @@
                     <div class="form-group">
                         <div class="col-lg-4 col-lg-offset-2">
                             <?php if (get_admin_login()->is_level != '4') { ?>
-                                <button type="submit" class="btn btn-primary" id="startUpload">Save</button>
+                                <button type="button" class="btn btn-primary" id="startUpload">Save</button>
                             <?php } ?>
                             <button type="button" class="btn btn-default" id="btn_back">Back</button>
                         </div>
@@ -128,9 +147,111 @@
         });
 
         tinyInit('textarea#detail');
-
+        list_image();
 
     }); //End document ready functions
+
+    function list_image() {
+
+        $.get("<?php echo site_url('cases/list_file/' . $query[0]->id) ?>", function(data) {
+            $("#image_list_edit").html(data);
+        });
+    }
+
+    function delete_file(id, path) {
+        if (confirm('Do you want to delete?')) {
+            $.ajax({
+                method: "POST",
+                url: "<?php echo site_url('faq/delete_file/' . $query[0]->id) ?>",
+                data: {
+                    pos: id
+                }
+            }).done(function(msg) {
+                // alert("Data Saved: " + msg);
+                list_image();
+            });
+        }
+    }
+
+
+    $(function() {
+        var image_list = '';
+        var image_obj = [];
+        //Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("div#myDropzone", {
+            url: "<?php echo site_url('faq/upload') ?>",
+            paramName: "file",
+            autoProcessQueue: false,
+            uploadMultiple: false, // uplaod files in a single request
+            parallelUploads: 100,
+            maxFilesize: 1, // MB
+            maxFiles: 10,
+            acceptedFiles: ".jpg, .jpeg, .png, .gif, .pdf",
+            addRemoveLinks: true,
+            // Language Strings
+            dictFileTooBig: "File is to big ({{filesize}}mb). Max allowed file size is {{maxFilesize}}mb",
+            dictInvalidFileType: "Invalid File Type",
+            dictCancelUpload: "Cancel",
+            dictRemoveFile: "Remove",
+            dictMaxFilesExceeded: "Only {{maxFiles}} files are allowed",
+            dictDefaultMessage: "Drop files here to upload",
+            init: function() {
+                console.log('init');
+                this.on("maxfilesexceeded", function(file) {
+                    alert("No more files please!");
+                    this.removeFile(file);
+                });
+            }
+        });
+
+        myDropzone.on("addedfile", function(file) {
+            //console.log('addedfile',file);
+        });
+        myDropzone.on("sending", function(file, xhr, formData) {
+            // Will send the filesize along with the file as POST data.
+            //formData.append("filesize", file.size);
+            //console.log('sending',file);
+        });
+        myDropzone.on("error", function(file, response) {
+            console.log('error', response);
+        });
+        myDropzone.on("success", function(file, xhr) {
+            //console.log('success',file);
+            if (xhr.code == 200) {
+                image_obj.push(xhr.path);
+            }
+
+            console.log('success xhr', xhr);
+        });
+        myDropzone.on("queuecomplete", function() {
+
+            $("#file_list").val(JSON.stringify(image_obj));
+            console.log(image_obj);
+            console.log('queuecomplete');
+            $("#form-validate").submit();
+        });
+
+        $('#startUpload').click(function() {
+
+            var fff = $("#form-validate");
+            fff.validate({
+                ignore: 'input[type="hidden"]',
+                rules: {
+                    title: "required"
+                }
+            });
+
+
+            if (myDropzone.files != "") {
+                if (fff.valid())
+                    myDropzone.processQueue();
+            } else {
+                if (fff.valid())
+                    $("#form-validate").submit();
+            }
+        });
+
+    });
 
 </script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/tinymce4/tinymce.min.js"></script>

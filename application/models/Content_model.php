@@ -26,10 +26,11 @@ class Content_model extends CI_Model
         // search
         $this->db->select('id,content_type,temple_id,cate_id,title,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb,description,event_date,event_end_date,publish_date,location,created,modified'. $select_field);
         $this->db->from($table);
+
         // $this->db->where('is_status', 'publish');
 
-        if (isset($keyword['temple_id']) && $keyword['temple_id'] != '') {
-            $this->db->where('temple_id', $keyword['temple_id']);
+        if (isset($keyword['is_status']) && $keyword['is_status'] != '') {
+            $this->db->where('is_status', $keyword['is_status']);
         }
         if (isset($keyword['content_type']) && !empty($keyword['content_type'])) {
             $this->db->where('content_type', $keyword['content_type']);
@@ -78,8 +79,8 @@ class Content_model extends CI_Model
         // count all
         $this->db->from($table);
         // $this->db->where('is_status', 'publish');
-        if (isset($keyword['temple_id']) && $keyword['temple_id'] != '') {
-            $this->db->where('temple_id', $keyword['temple_id']);
+        if (isset($keyword['is_status']) && $keyword['is_status'] != '') {
+            $this->db->where('is_status', $keyword['is_status']);
         }
         if (isset($keyword['content_type']) && !empty($keyword['content_type'])) {
             $this->db->where('content_type', $keyword['content_type']);
@@ -152,11 +153,12 @@ class Content_model extends CI_Model
         $offset = ($page_size * $page_no) - $page_size;
 
         // search
-        $this->db->select('id,temple_id,cate_id,title,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb,banner_link,description');
+        $this->db->select('id,cate_id,title,CONCAT( \'' . base_url() . '\',`thumb` ) AS thumb,banner_link,description');
         $this->db->from($table);
-        $this->db->where('is_status', 'publish');
-        if (isset($keyword['temple_id']) && $keyword['temple_id'] != '') {
-            $this->db->where('temple_id', $keyword['temple_id']);
+        // $this->db->where('is_status', 'publish');
+
+        if (isset($keyword['is_status']) && $keyword['is_status'] != '') {
+            $this->db->where('is_status', $keyword['is_status']);
         }
         if (isset($keyword['content_type']) && !empty($keyword['content_type'])) {
             $this->db->where('content_type', $keyword['content_type']);
@@ -165,15 +167,22 @@ class Content_model extends CI_Model
             $this->db->where('cate_id', $keyword['cate_id']);
         }
         $this->db->limit($page_size, $offset);
-        $this->db->order_by("id", "DESC");
+        // $this->db->order_by("id", "DESC");
+        if (isset($keyword['old']) && !empty($keyword['old'])) {
+            $this->db->order_by("id", "ASC");
+        } else {
+            $this->db->order_by("id", "DESC");
+            // $this->db->order_by("publish_date", "DESC");
+        }
+
         $data['data'] = $this->db->get()->result();
         //print $this->db->last_query();
 
         // count all
         $this->db->from($table);
-        $this->db->where('is_status', 'publish');
-        if (isset($keyword['temple_id']) && $keyword['temple_id'] != '') {
-            $this->db->where('temple_id', $keyword['temple_id']);
+        // $this->db->where('is_status', 'publish');
+        if (isset($keyword['is_status']) && $keyword['is_status'] != '') {
+            $this->db->where('is_status', $keyword['is_status']);
         }
         if (isset($keyword['content_type']) && !empty($keyword['content_type'])) {
             $this->db->where('content_type', $keyword['content_type']);
